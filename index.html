@@ -1,23 +1,17 @@
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Press+Start+2P">
-    <style>
-      body {
-		font-family: 'Press Start 2P', cursive;
-        font-size: 24px;
-		position:absolute;
-		top: 40%;
-		width: 100%;
-		margin-left:auto;
-      }
-	  div {
-	  	text-align:center;
-	  }
-    </style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
-	<div>
-		Index.html
+	<div class="container">
+	  <p>This is a proof of concept site where I attempted to set response headers from a Netlify 200 proxied request. I was unable to set a response header in proxied requests via any of these methods. You can follow along by opening the below links and looking at the network headers in your browser's devtools
+	  <p><a href="https://github.com/seansaleh/netlify-proxy-headers">Github source repository</a>
+	  <p><a href="/">/  /index.html  200</a><br>	#From _redirects, will show headers in response
+	  <p><a href="/splat/test">/splat/*  https://httpbin.org/anything/:splat  200</a><br>	#From _redirects, will not set headers in either request or response. Headers are set both in _headers and netlify.toml
+	  <p><a href="/other/test">[[redirects]]<br>from = "/other/*"<br>to = "https://httpbin.org/anything/:splat"<br>status = 200<br>force = true<br>headers = {X-From = "Netlify", X-Api-Key = "some-api-key-string"}</a>\<br>	#From netlify.toml, header set as part of redirects definition. Header is only appended to request
+	  <p><a href="/fizz">[[redirects]]<br>from = "/fizz"<br>to = "https://httpbin.org/anything/buzz"<br>status = 200<br>force = false<br>headers = {X-From = "Netlify-fizz"}</a><br>	#From netlify.toml, no splat used. Header set at part of redirects definition. Header is only appended to request
+	  <p>In the source for <a href="https://github.com/seansaleh/netlify-proxy-headers/blob/master/netlify.toml">netlify.toml</a> you can view more attempt I made to get headers set on the response from a netlify proxied request.
+	  <br>I would expect that at least one of the ways to set headers, either via _headers or defining them in [[headers]] would be able to set a response header in Netlify.
 	</div>
   </body>
 </html>
