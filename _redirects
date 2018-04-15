@@ -1,0 +1,2 @@
+/	/index.html								200
+/splat/*	https://httpbin.org/anything/:splat		200

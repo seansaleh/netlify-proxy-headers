@@ -1,0 +1,38 @@
+[[headers]]
+  for = "/splat/*"
+[headers.values]
+  X-Other-Header-toml = "splatstar"
+  
+[[headers]]
+  for = "/splat/*	https://httpbin.org/anything/:splat	200"
+[headers.values]
+  X-Other-Header-toml = "splatstardetailed"
+  
+[[headers]]
+  for = "/*"
+[headers.values]
+  X-Other-Header-toml = "star"
+  
+[[headers]]
+  for = "/"
+[headers.values]
+  X-Other-Header-toml = "root"
+  
+[[headers]]
+  for = "https://httpbin.org/anything/:splat"
+[headers.values]
+  X-Other-Header = "forurl"
+  
+[[redirects]]
+  from = "/fizz"
+  to = "https://httpbin.org/anything/buzz"
+  status = 200
+  force = false
+  headers = {X-From = "Netlify-fizz"}
+  
+[[redirects]]
+  from = "/other/*"
+  to = "https://httpbin.org/anything/:splat"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify", X-Api-Key = "some-api-key-string"}

@@ -1,0 +1,9 @@
+/splat/*
+  X-Other-Header: inheaders
+/
+  X-Other-Header: inheaders-root
+/https://httpbin.org/anything/:splat
+  X-Other-Header: slashurl
+https://httpbin.org/anything/:splat
+  X-Other-Header: url
+  
